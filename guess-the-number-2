@@ -1,0 +1,55 @@
+from tkinter import *
+import random
+import tkinter.messagebox
+import math
+
+main_window = Tk()
+main_window.minsize(500,200)
+main_window.title('Guess the number')
+
+number1 = random.randint(1,20)
+number2 = random.randint(1,20)
+product = number1 * number2
+
+def check_number():
+    guess = number_input.get()
+    guess = int(guess)
+    try:
+        if guess > product:
+            tkinter.messagebox.showinfo('High','Your guess is too high')
+
+        elif guess < product:
+            tkinter.messagebox.showinfo('Low','You guess is too low')
+
+        else:
+            tkinter.messagebox.showinfo('Correct','You are correct!')
+            main_window.quit()
+    except ValueError:
+        tkinter.messagebox.showinfo('Numbers only', 'This is a number guessing game, not letters')
+
+def btn_confirm():
+    name = name_input.get()
+    tkinter.messagebox.showinfo('Welcome','Hello ' +name +'! I am thinking of a number 1 to 20. Guess what it by saying a number in that numbers in that time table.')
+
+welcome_label = tkinter.Label(main_window, text = 'Welcome to guess the number!')
+welcome_label.pack()
+
+name_label = tkinter.Label(main_window, text = 'Please enter your name:')
+name_label.place(x = 25, y = 25)
+
+name_input = tkinter.Entry(main_window, width = 25)
+name_input.place(x = 200, y = 25)
+
+name_confirm_button = tkinter.Button(main_window, text = 'Enter', command = btn_confirm)
+name_confirm_button.place(x = 400, y= 25)
+
+guess_prompt_label = tkinter.Label(main_window, text = 'Take a guess!')
+guess_prompt_label.place(x = 25, y = 75)
+
+number_input = tkinter.Entry(main_window, width = 25)
+number_input.place(x = 200, y = 75)
+
+guess_confirm_button = tkinter.Button(main_window, text = 'Enter guess', command = check_number)
+guess_confirm_button.place(x = 400, y = 75)
+
+main_window.mainloop()
